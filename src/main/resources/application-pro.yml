@@ -1,5 +1,5 @@
 bootdo:
-  uploadPath: /var/uploaded_files/
+  uploadPath: /home/uploaded_files/
 logging:
   level:
     root: error
@@ -8,9 +8,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/bootdo?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://47.96.101.254:3306/bootdo-wms?useUnicode=true&characterEncoding=utf8
     username: root
-    password: root
+    password: Skyliu@625
     initialSize: 1
     minIdle: 3
     maxActive: 20
