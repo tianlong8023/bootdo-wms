@@ -5,8 +5,11 @@
 
     <groupId>com.bootdo</groupId>
     <artifactId>bootdo-wms</artifactId>
-    <version>1.6.9</version>
-    <packaging>jar</packaging>
+    <!--<version>1.6.9</version>-->
+    <!--<packaging>jar</packaging>-->
+    <!--war包发布-->
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <name>bootdo</name>
     <description>Demo project for Spring Boot</description>
@@ -215,21 +218,28 @@
         </dependency>
 
         <!--war包部署需要-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!-- 移除嵌入式tomcat插件 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--或者用tomcat的api-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-web</artifactId>-->
-            <!--&lt;!&ndash; 移除嵌入式tomcat插件 &ndash;&gt;-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework.boot</groupId>-->
-                    <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>javax.servlet-api</artifactId>-->
-            <!--<version>3.1.0</version>-->
+            <!--<groupId>org.apache.tomcat</groupId>-->
+            <!--<artifactId>tomcat-servlet-api</artifactId>-->
+            <!--<version>8.0.36</version>-->
             <!--<scope>provided</scope>-->
         <!--</dependency>-->
     </dependencies>
