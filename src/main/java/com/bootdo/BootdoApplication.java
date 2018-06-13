@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
@@ -16,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class BootdoApplication {
     public static void main(String[] args) {
         SpringApplication.run(BootdoApplication.class, args);
-        System.out.println("ヾ(◍°∇°◍)ﾉﾞ    bootdo启动成功      ヾ(◍°∇°◍)ﾉﾞ\n" +
+        System.out.println("ヾ(◍°∇°◍)ﾉﾞ    bootdo-wms启动成功      ヾ(◍°∇°◍)ﾉﾞ\n" +
                 " ______                    _   ______            \n" +
                 "|_   _ \\                  / |_|_   _ `.          \n" +
                 "  | |_) |   .--.    .--. `| |-' | | `. \\  .--.   \n" +
