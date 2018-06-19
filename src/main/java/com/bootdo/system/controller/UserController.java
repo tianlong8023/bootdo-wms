@@ -3,18 +3,18 @@ package com.bootdo.system.controller;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.DictService;
-import com.bootdo.common.utils.*;
+import com.bootdo.common.utils.MD5Utils;
+import com.bootdo.common.utils.PageUtils;
+import com.bootdo.common.utils.Query;
+import com.bootdo.common.utils.Result;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.RoleDO;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.service.RoleService;
 import com.bootdo.system.service.UserService;
 import com.bootdo.system.vo.UserVO;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,29 +78,29 @@ public class UserController extends BaseController {
 	@Log("保存用户")
 	@PostMapping("/save")
 	@ResponseBody
-	R save(UserDO user) {
+	Result save(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		if (userService.save(user) > 0) {
-			return R.ok();
+			return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 
 	@RequiresPermissions("sys:user:edit")
 	@Log("更新用户")
 	@PostMapping("/update")
 	@ResponseBody
-	R update(UserDO user) {
+	Result update(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		if (userService.update(user) > 0) {
-			return R.ok();
+			return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 
 
@@ -111,14 +108,14 @@ public class UserController extends BaseController {
 	@Log("更新用户")
 	@PostMapping("/updatePeronal")
 	@ResponseBody
-	R updatePeronal(UserDO user) {
+	Result updatePeronal(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		if (userService.updatePersonal(user) > 0) {
-			return R.ok();
+			return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 
 
@@ -126,29 +123,29 @@ public class UserController extends BaseController {
 	@Log("删除用户")
 	@PostMapping("/remove")
 	@ResponseBody
-	R remove(Long id) {
+	Result remove(Long id) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		if (userService.remove(id) > 0) {
-			return R.ok();
+			return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 
 	@RequiresPermissions("sys:user:batchRemove")
 	@Log("批量删除用户")
 	@PostMapping("/batchRemove")
 	@ResponseBody
-	R batchRemove(@RequestParam("ids[]") Long[] userIds) {
+	Result batchRemove(@RequestParam("ids[]") Long[] userIds) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		int r = userService.batchremove(userIds);
 		if (r > 0) {
-			return R.ok();
+			return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 
 	@PostMapping("/exit")
@@ -172,15 +169,15 @@ public class UserController extends BaseController {
 	@Log("提交更改用户密码")
 	@PostMapping("/resetPwd")
 	@ResponseBody
-	R resetPwd(UserVO userVO) {
+	Result resetPwd(UserVO userVO) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		try{
 			userService.resetPwd(userVO,getUser());
-			return R.ok();
+			return Result.ok();
 		}catch (Exception e){
-			return R.error(1,e.getMessage());
+			return Result.error(1, e.getMessage());
 		}
 
 	}
@@ -188,15 +185,15 @@ public class UserController extends BaseController {
 	@Log("admin提交更改用户密码")
 	@PostMapping("/adminResetPwd")
 	@ResponseBody
-	R adminResetPwd(UserVO userVO) {
+	Result adminResetPwd(UserVO userVO) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		try{
 			userService.adminResetPwd(userVO);
-			return R.ok();
+			return Result.ok();
 		}catch (Exception e){
-			return R.error(1,e.getMessage());
+			return Result.error(1, e.getMessage());
 		}
 
 	}
@@ -223,20 +220,41 @@ public class UserController extends BaseController {
 	}
 	@ResponseBody
 	@PostMapping("/uploadImg")
-	R uploadImg(@RequestParam("avatar_file") MultipartFile file, String avatar_data, HttpServletRequest request) {
+	Result uploadImg(@RequestParam("avatar_file") MultipartFile file, String avatar_data, HttpServletRequest request) {
 		if ("test".equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		Map<String, Object> result = new HashMap<>();
 		try {
 			result = userService.updatePersonalImg(file, avatar_data, getUserId());
 		} catch (Exception e) {
-			return R.error("更新图像失败！");
+			return Result.error("更新图像失败！");
 		}
 		if(result!=null && result.size()>0){
-			return R.ok(result);
+			return Result.ok(result);
 		}else {
-			return R.error("更新图像失败！");
+			return Result.error("更新图像失败！");
 		}
 	}
+
+
+	@Log("获取用户信息")
+	@GetMapping("/query/{username}")
+	@ResponseBody
+	Result query(@PathVariable("username") String username) {
+		Result result = new Result();
+		result.put("data", userService.queryByUsername(username));
+		return result;
+	}
+
+	@Log("用户注册")
+	@GetMapping("/register")
+	@ResponseBody
+	Result register(UserDO user) {
+		if (userService.register(user) > 0) {
+			return Result.ok();
+		}
+		return Result.error();
+	}
+
 }

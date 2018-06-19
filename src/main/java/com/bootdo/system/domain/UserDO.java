@@ -35,7 +35,7 @@ public class UserDO implements Serializable {
     private List<Long> roleIds;
     //性别
     private Long sex;
-    //出身日期
+    //出生日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     //图片ID

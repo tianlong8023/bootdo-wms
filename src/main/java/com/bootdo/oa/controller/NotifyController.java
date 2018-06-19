@@ -6,7 +6,7 @@ import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.service.DictService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.Result;
 import com.bootdo.oa.domain.NotifyDO;
 import com.bootdo.oa.domain.NotifyRecordDO;
 import com.bootdo.oa.service.NotifyRecordService;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -87,16 +86,16 @@ public class NotifyController extends BaseController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("oa:notify:add")
-	public R save(NotifyDO notify) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result save(NotifyDO notify) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		notify.setCreateBy(getUserId());
 		if (notifyService.save(notify) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+            return Result.ok();
+        }
+        return Result.error();
+    }
 
 	/**
 	 * 修改
@@ -104,13 +103,13 @@ public class NotifyController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("oa:notify:edit")
-	public R update(NotifyDO notify) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result update(NotifyDO notify) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		notifyService.update(notify);
-		return R.ok();
-	}
+        return Result.ok();
+    }
 
 	/**
 	 * 删除
@@ -118,15 +117,15 @@ public class NotifyController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("oa:notify:remove")
-	public R remove(Long id) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result remove(Long id) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (notifyService.remove(id) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+            return Result.ok();
+        }
+        return Result.error();
+    }
 
 	/**
 	 * 删除
@@ -134,13 +133,13 @@ public class NotifyController extends BaseController {
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("oa:notify:batchRemove")
-	public R remove(@RequestParam("ids[]") Long[] ids) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result remove(@RequestParam("ids[]") Long[] ids) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		notifyService.batchRemove(ids);
-		return R.ok();
-	}
+        return Result.ok();
+    }
 
 	@ResponseBody
 	@GetMapping("/message")

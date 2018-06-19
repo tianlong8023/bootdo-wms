@@ -3,7 +3,7 @@ package com.bootdo.system.controller;
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.Result;
 import com.bootdo.system.domain.RoleDO;
 import com.bootdo.system.service.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -55,59 +55,59 @@ public class RoleController extends BaseController {
 	@RequiresPermissions("sys:role:add")
 	@PostMapping("/save")
 	@ResponseBody()
-	R save(RoleDO role) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    Result save(RoleDO role) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (roleService.save(role) > 0) {
-			return R.ok();
-		} else {
-			return R.error(1, "保存失败");
-		}
+            return Result.ok();
+        } else {
+            return Result.error(1, "保存失败");
+        }
 	}
 
 	@Log("更新角色")
 	@RequiresPermissions("sys:role:edit")
 	@PostMapping("/update")
 	@ResponseBody()
-	R update(RoleDO role) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    Result update(RoleDO role) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (roleService.update(role) > 0) {
-			return R.ok();
-		} else {
-			return R.error(1, "保存失败");
-		}
+            return Result.ok();
+        } else {
+            return Result.error(1, "保存失败");
+        }
 	}
 
 	@Log("删除角色")
 	@RequiresPermissions("sys:role:remove")
 	@PostMapping("/remove")
 	@ResponseBody()
-	R save(Long id) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    Result save(Long id) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (roleService.remove(id) > 0) {
-			return R.ok();
-		} else {
-			return R.error(1, "删除失败");
-		}
+            return Result.ok();
+        } else {
+            return Result.error(1, "删除失败");
+        }
 	}
 	
 	@RequiresPermissions("sys:role:batchRemove")
 	@Log("批量删除角色")
 	@PostMapping("/batchRemove")
 	@ResponseBody
-	R batchRemove(@RequestParam("ids[]") Long[] ids) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    Result batchRemove(@RequestParam("ids[]") Long[] ids) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		int r = roleService.batchremove(ids);
 		if (r > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+            return Result.ok();
+        }
+        return Result.error();
+    }
 }

@@ -5,7 +5,7 @@ import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.service.DictService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,15 +67,15 @@ public class DictController extends BaseController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("common:dict:add")
-	public R save(DictDO dict) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result save(DictDO dict) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (dictService.save(dict) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+            return Result.ok();
+        }
+        return Result.error();
+    }
 
 	/**
 	 * 修改
@@ -83,13 +83,13 @@ public class DictController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("common:dict:edit")
-	public R update(DictDO dict) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result update(DictDO dict) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		dictService.update(dict);
-		return R.ok();
-	}
+        return Result.ok();
+    }
 
 	/**
 	 * 删除
@@ -97,15 +97,15 @@ public class DictController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("common:dict:remove")
-	public R remove(Long id) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result remove(Long id) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (dictService.remove(id) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+            return Result.ok();
+        }
+        return Result.error();
+    }
 
 	/**
 	 * 删除
@@ -113,13 +113,13 @@ public class DictController extends BaseController {
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("common:dict:batchRemove")
-	public R remove(@RequestParam("ids[]") Long[] ids) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result remove(@RequestParam("ids[]") Long[] ids) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		dictService.batchRemove(ids);
-		return R.ok();
-	}
+        return Result.ok();
+    }
 
 	@GetMapping("/type")
 	@ResponseBody

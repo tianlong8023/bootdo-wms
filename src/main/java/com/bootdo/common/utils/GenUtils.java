@@ -4,6 +4,7 @@ package com.bootdo.common.utils;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.domain.ColumnDO;
 import com.bootdo.common.domain.TableDO;
+import com.bootdo.common.exception.BDException;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -159,13 +160,24 @@ public class GenUtils {
     }
 
     /**
+     * 获取异常配置信息
+     */
+    public static Configuration getExceptionConfig(String exceptionName) {
+        try {
+            return new PropertiesConfiguration(exceptionName + ".properties");
+        } catch (ConfigurationException e) {
+            throw new BDException("获取配置文件" + exceptionName + ".properties" + "失败，", e);
+        }
+    }
+
+    /**
      * 获取配置信息
      */
     public static Configuration getConfig() {
         try {
             return new PropertiesConfiguration("generator.properties");
         } catch (ConfigurationException e) {
-            throw new BDException("获取配置文件失败，", e);
+            throw new BDException("获取配置文件generator.properties失败，", e);
         }
     }
 

@@ -1,16 +1,15 @@
 package com.bootdo.system.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.bootdo.system.vo.UserVO;
-import org.springframework.stereotype.Service;
-
 import com.bootdo.common.domain.Tree;
 import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.UserDO;
+import com.bootdo.system.vo.UserVO;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public interface UserService {
@@ -51,4 +50,27 @@ public interface UserService {
 	 * @throws Exception
 	 */
     Map<String, Object> updatePersonalImg(MultipartFile file, String avatar_data, Long userId) throws Exception;
+
+    /**
+     * @param username
+     * @return
+     * @MethodName queryByUsername
+     * @Description 根据用户名查询用户信息
+     * @Author sky.liu
+     * @Date 2018/6/19 14:59
+     * @ChangeLog
+     */
+    UserDO queryByUsername(String username);
+
+    /**
+     * @param user
+     * @return
+     * @MethodName register
+     * @Description 用户注册
+     * @Author sky.liu
+     * @Date 2018/6/19 14:04
+     * @ChangeLog
+     */
+    int register(UserDO user);
+
 }

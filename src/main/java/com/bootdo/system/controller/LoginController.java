@@ -6,11 +6,10 @@ import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.MD5Utils;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.Result;
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
-import io.swagger.models.auth.In;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -68,17 +67,24 @@ public class LoginController extends BaseController {
 	@Log("登录")
 	@PostMapping("/login")
 	@ResponseBody
-	R ajaxLogin(String username, String password) {
-
+	Result ajaxLogin(String username, String password) {
 		password = MD5Utils.encrypt(username, password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(token);
-			return R.ok();
+			return Result.ok();
 		} catch (AuthenticationException e) {
-			return R.error("用户或密码错误");
+			return Result.error("用户或密码错误");
 		}
+	}
+
+	@Log("注销")
+	@GetMapping("/logoutNew")
+	@ResponseBody
+	Result ajaxLogut() {
+		ShiroUtils.logout();
+		return Result.ok();
 	}
 
 	@GetMapping("/logout")

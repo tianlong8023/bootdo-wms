@@ -5,7 +5,7 @@ import com.bootdo.common.domain.TaskDO;
 import com.bootdo.common.service.JobService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,74 +58,74 @@ public class JobController extends BaseController{
 	 * 信息
 	 */
 	@RequestMapping("/info/{id}")
-	public R info(@PathVariable("id") Long id) {
-		TaskDO taskScheduleJob = taskScheduleJobService.get(id);
-		return R.ok().put("taskScheduleJob", taskScheduleJob);
-	}
+    public Result info(@PathVariable("id") Long id) {
+        TaskDO taskScheduleJob = taskScheduleJobService.get(id);
+        return Result.ok().put("taskScheduleJob", taskScheduleJob);
+    }
 
 	/**
 	 * 保存
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	public R save(TaskDO taskScheduleJob) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result save(TaskDO taskScheduleJob) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (taskScheduleJobService.save(taskScheduleJob) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+            return Result.ok();
+        }
+        return Result.error();
+    }
 
 	/**
 	 * 修改
 	 */
 	@ResponseBody
 	@PostMapping("/update")
-	public R update(TaskDO taskScheduleJob) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result update(TaskDO taskScheduleJob) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		taskScheduleJobService.update(taskScheduleJob);
-		return R.ok();
-	}
+        return Result.ok();
+    }
 
 	/**
 	 * 删除
 	 */
 	@PostMapping("/remove")
 	@ResponseBody
-	public R remove(Long id) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result remove(Long id) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		if (taskScheduleJobService.remove(id) > 0) {
-			return R.ok();
-		}
-		return R.error();
-	}
+            return Result.ok();
+        }
+        return Result.error();
+    }
 
 	/**
 	 * 删除
 	 */
 	@PostMapping("/batchRemove")
 	@ResponseBody
-	public R remove(@RequestParam("ids[]") Long[] ids) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result remove(@RequestParam("ids[]") Long[] ids) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		taskScheduleJobService.batchRemove(ids);
 
-		return R.ok();
-	}
+        return Result.ok();
+    }
 
 	@PostMapping(value = "/changeJobStatus")
 	@ResponseBody
-	public R changeJobStatus(Long id,String cmd ) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
-		}
+    public Result changeJobStatus(Long id, String cmd) {
+        if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+            return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
+        }
 		String label = "停止";
 		if ("start".equals(cmd)) {
 			label = "启动";
@@ -134,11 +134,11 @@ public class JobController extends BaseController{
 		}
 		try {
 			taskScheduleJobService.changeStatus(id, cmd);
-			return R.ok("任务" + label + "成功");
-		} catch (Exception e) {
+            return Result.ok("任务" + label + "成功");
+        } catch (Exception e) {
 			e.printStackTrace();
 		}
-		return R.ok("任务" + label + "失败");
-	}
+        return Result.ok("任务" + label + "失败");
+    }
 
 }

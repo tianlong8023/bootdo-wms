@@ -1,24 +1,12 @@
 package com.bootdo.system.service.impl;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.util.*;
-
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.domain.FileDO;
+import com.bootdo.common.domain.Tree;
+import com.bootdo.common.exception.BDException;
+import com.bootdo.common.exception.ExceptionTypeEnum;
 import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.*;
-import com.bootdo.system.vo.UserVO;
-import org.apache.commons.lang.ArrayUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.bootdo.common.domain.Tree;
 import com.bootdo.system.dao.DeptDao;
 import com.bootdo.system.dao.UserDao;
 import com.bootdo.system.dao.UserRoleDao;
@@ -26,9 +14,19 @@ import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.domain.UserRoleDO;
 import com.bootdo.system.service.UserService;
+import com.bootdo.system.vo.UserVO;
+import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.util.*;
 
 //@CacheConfig(cacheNames = "user")
 @Transactional
@@ -239,6 +237,67 @@ public class UserServiceImpl implements UserService {
             }
         }
         return result;
+    }
+
+    @Override
+    public UserDO queryByUsername(String username) {
+        Map key1 = new HashMap();
+        key1.put("username", username);
+        List<UserDO> list1 = userMapper.list(key1);
+        if (CommonUtil.isEmpty(list1)) {
+            throw new BDException(ExceptionTypeEnum.BD, 10010);
+        }
+        return list1.get(0);
+    }
+
+    @Transactional
+    @Override
+    public int register(UserDO user) {
+        if (user == null) {
+            throw new BDException(ExceptionTypeEnum.BD, 10000);
+        }
+        // 用户名验证
+        if (CommonUtil.isEmpty(user.getUsername())) {
+            throw new BDException(ExceptionTypeEnum.BD, 10001);
+        }
+        if (user.getUsername().trim().length() < 5) {
+            throw new BDException(ExceptionTypeEnum.BD, 10002);
+        }
+        Map key1 = new HashMap();
+        key1.put("username", user.getUsername());
+        List<UserDO> list1 = userMapper.list(key1);
+        if (CommonUtil.isNotEmpty(list1)) {
+            throw new BDException(ExceptionTypeEnum.BD, 10003);
+        }
+        // 密码验证
+        if (CommonUtil.isEmpty(user.getPassword())) {
+            throw new BDException(ExceptionTypeEnum.BD, 10004);
+        }
+        if (user.getPassword().trim().length() < 5) {
+            throw new BDException(ExceptionTypeEnum.BD, 10005);
+        }
+        user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+        // 邮箱验证
+        if (CommonUtil.isEmpty(user.getEmail())) {
+            throw new BDException(ExceptionTypeEnum.BD, 10006);
+        }
+        Map key2 = new HashMap();
+        key2.put("email", user.getEmail());
+        List<UserDO> list2 = userMapper.list(key2);
+        if (CommonUtil.isNotEmpty(list2)) {
+            throw new BDException(ExceptionTypeEnum.BD, 10007);
+        }
+        // 手机验证
+        if (CommonUtil.isEmpty(user.getMobile())) {
+            throw new BDException(ExceptionTypeEnum.BD, 10008);
+        }
+        Map key3 = new HashMap();
+        key3.put("mobile", user.getMobile());
+        List<UserDO> list3 = userMapper.list(key3);
+        if (CommonUtil.isNotEmpty(list3)) {
+            throw new BDException(ExceptionTypeEnum.BD, 10009);
+        }
+        return userMapper.save(user);
     }
 
 }
