@@ -25,23 +25,41 @@
 		  rel="stylesheet">
 </head>
 <div th:fragment="footer">
-	<script src="/js/jquery.min.js?v=2.1.4"></script>
-	<script src="/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-	<script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+	<script src="/js/jquery.min.js?v=2.1.4"
+			th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+	<script src="/js/bootstrap.min.js?v=3.3.6"
+			th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+	<script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"
+			th:src="@{/js/plugins/bootstrap-table/bootstrap-table.min.js}"></script>
+	<script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"
+			th:src="@{/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js}"></script>
 	<script
-			src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script src="/js/plugins/validate/jquery.validate.min.js"></script>
-	<script src="/js/plugins/validate/messages_zh.min.js"></script>
-	<script src="/js/plugins/jsTree/jstree.min.js"></script>
-	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.min.js"></script>
-	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.extension.js"></script>
-	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.bootstrap3.js"></script>
-	<script src="/js/plugins/chosen/chosen.jquery.js"></script>
-	<script src="/js/plugins/layer/layer.js"></script>
-	<script src="/js/content.js?v=1.0.0"></script>
+			src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"
+			th:src="@{/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
+	<script src="/js/plugins/validate/jquery.validate.min.js"
+			th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
+	<script src="/js/plugins/validate/messages_zh.min.js"
+			th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
+	<script src="/js/plugins/jsTree/jstree.min.js"
+			th:src="@{/js/plugins/jsTree/jstree.min.js}"></script>
+	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.min.js"
+			th:src="@{/js/plugins/jqTreeGrid/jquery.treegrid.min.js}"></script>
+	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.extension.js"
+			th:src="@{/js/plugins/jqTreeGrid/jquery.treegrid.extension.js}"></script>
+	<script src="/js/plugins/jqTreeGrid/jquery.treegrid.bootstrap3.js"
+			th:src="@{/js/plugins/jqTreeGrid/jquery.treegrid.bootstrap3.js}"></script>
+	<script src="/js/plugins/chosen/chosen.jquery.js"
+			th:src="@{/js/plugins/chosen/chosen.jquery.js}"></script>
+	<script src="/js/plugins/layer/layer.js"
+			th:src="@{/js/plugins/layer/layer.js}"></script>
+	<script src="/js/content.js?v=1.0.0"
+			th:src="@{/js/content.js?v=1.0.0}"></script>
 	<!--summernote-->
-	<script src="/js/plugins/summernote/summernote.js"></script>
-	<script src="/js/plugins/summernote/summernote-zh-CN.min.js"></script>
-	<script src="/js/ajax-util.js"></script>
+	<script src="/js/plugins/summernote/summernote.js"
+			th:src="@{/js/plugins/summernote/summernote.js}"></script>
+	<script src="/js/plugins/summernote/summernote-zh-CN.min.js"
+			th:src="@{/js/plugins/summernote/summernote-zh-CN.min.js}"></script>
+	<script src="/js/ajax-util.js"
+			th:src="@{/js/ajax-util.js}"></script>
 </div>
