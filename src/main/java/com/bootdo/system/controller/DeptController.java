@@ -158,4 +158,23 @@ public class DeptController extends BaseController {
 		return  prefix + "/deptTree";
 	}
 
+	@ApiOperation(value = "获取部门列表-前后端分离项目", notes = "")
+	@ResponseBody
+	@GetMapping("/queryList")
+	public Result queryList() {
+		Result result = new Result();
+		Map<String, Object> query = new HashMap<>(16);
+		result.put("data", sysDeptService.list(query));
+		return result;
+	}
+
+	@ApiOperation(value = "获取部门树-前后端分离项目", notes = "")
+	@ResponseBody
+	@GetMapping("/queryTree")
+	public Result queryTree() {
+		Result result = new Result();
+		result.put("data", sysDeptService.getTree());
+		return result;
+	}
+
 }
