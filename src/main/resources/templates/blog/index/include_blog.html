@@ -5,9 +5,12 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>bootdo面向学习型的开源框架</title>
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/blog/clean-blog.css" rel="stylesheet">
-<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="/css/bootstrap.min.css"
+		  th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link href="/css/blog/clean-blog.css"
+		  th:href="@{/css/blog/clean-blog.css}" rel="stylesheet">
+	<link href="/css/font-awesome.min.css"
+		  th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
 <style type="text/css">
 	@media (max-width:768px){
 		.side{ display:none;  }
@@ -87,15 +90,19 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/" style="font-size: 24px;">BootDo</a>
+			<a style="font-size: 24px;" class="navbar-brand" href="/"
+			   th:href="@{/}">BootDo-WMS</a>
 		</div>
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/">主页</a></li>
-				<li><a href="/blog/open/page/about">关于</a></li>
-				<li><a href="/blog/open/page/communication">交流</a></li>
-				<li><a href="/login">登录</a></li>
+				<li><a href="https://www.skyliu.club">主页</a></li>
+				<li><a href="/blog/open/page/about"
+					   th:href="@{/blog/open/page/about}">关于</a></li>
+				<li><a href="/blog/open/page/communication"
+					   th:href="@{/blog/open/page/communication}">交流</a></li>
+				<li><a href="/login"
+					   th:href="@{/login}">登录</a></li>
 			</ul>
 		</div>
 	</div>
@@ -118,7 +125,7 @@
 									class="fa fa-home fa-stack-1x fa-inverse"></i>
 							</span>
 						</a></li>
-						<li><a href="https://github.com/lcg0124/bootdo.git"> <span
+						<li><a href="https://github.com/tianlong8023/bootdo-wms.git"> <span
 								class="fa-stack fa-lg"> <i
 									class="fa fa-circle fa-stack-2x"></i> <i
 									class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -137,7 +144,8 @@
 		<ul>
 			<li>
 				<div class="qqbdimg">
-					<img src="/img/blog/qqbootdo.png" title="学习交流"/>
+					<img src="/img/blog/qqbootdo.png"
+						 th:src="@{/img/blog/qqbootdo.png}" title="学习交流"/>
 				</div>
 				<a class="sidetop" id="qqbd" href="javascript:scroll(0,0)" title="学习交流"><i
 					class="fa fa-qq"></i></a>
@@ -149,12 +157,19 @@
 			</li>
 		</ul>
 	</div>
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/plugins/layer/layer.js"></script>
-	<script src="/js/ajax-util.js"></script>
-	<script src="/js/appjs/blog/clean-blog.min.js"></script>
-	<script src="/js/plugins/summernote/summernote.min.js"></script>
-	<script src="/js/plugins/summernote/summernote-zh-CN.js"></script>
+	<script src="/js/jquery.min.js"
+			th:src="@{/js/jquery.min.js}"></script>
+	<script src="/js/bootstrap.min.js"
+			th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="/js/plugins/layer/layer.js"
+			th:src="@{/js/plugins/layer/layer.js}"></script>
+	<script src="/js/ajax-util.js"
+			th:src="@{/js/ajax-util.js}"></script>
+	<script src="/js/appjs/blog/clean-blog.min.js"
+			th:src="@{/js/appjs/blog/clean-blog.min.js}"></script>
+	<script src="/js/plugins/summernote/summernote.min.js"
+			th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+	<script src="/js/plugins/summernote/summernote-zh-CN.js"
+			th:src="@{/js/plugins/summernote/summernote-zh-CN.js}"></script>
 </div>
 

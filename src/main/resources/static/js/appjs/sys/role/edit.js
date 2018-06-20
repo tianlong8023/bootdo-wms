@@ -36,7 +36,7 @@ function getMenuTreeData() {
 	var roleId = $('#roleId').val();
 	$.ajax({
 		type : "GET",
-		url : "/sys/menu/tree/" + roleId,
+        url: ctx + "sys/menu/tree/" + roleId,
 		success : function(data) {
 			loadMenuTree(data);
 		}
@@ -48,7 +48,7 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/sys/role/update",
+        url: ctx + "sys/role/update",
 		data : role, // 你的formid
 		async : false,
 		error : function(request) {

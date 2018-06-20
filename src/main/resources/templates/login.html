@@ -8,11 +8,11 @@
     <title>BootDo-wms</title>
     <meta name="keywords" content="BootDo-wms管理系统">
     <meta name="description" content="BootDo-wms管理系统">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/login.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="/css/font-awesome.css?v=4.4.0" th:href="@{/css/font-awesome.css?v=4.4.0}" rel="stylesheet">
+    <link href="/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet">
+    <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <link href="/css/login.css" th:href="@{/css/login.css}" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -67,7 +67,7 @@
                     </div>
                     <div class="outside-login-cot">
                         <a class="outside-login-btn wxoa actived oschina J-btnSwitchLoginType" target="_Blank"
-                           href="http://47.96.101.254">
+                           href="https://www.skyliu.club">
                             <em><i class="fa fa-home"></i></em>
                             <span>skyliu主页</span>
                         </a>
@@ -101,7 +101,7 @@
 <script src="/js/content.js?v=1.0.0" th:src="@{/js/content.js?v=1.0.0}"></script>
 
 <!-- jQuery Validation plugin javascript-->
-<script src="/js/ajax-util.js"></script>
+<script src="/js/ajax-util.js" th:src="@{/js/ajax-util.js}"></script>
 <script src="/js/plugins/validate/jquery.validate.min.js" th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
 <script src="/js/plugins/validate/messages_zh.min.js" th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
 <script src="/js/plugins/layer/layer.min.js" th:src="@{/js/plugins/layer/layer.min.js}"></script>
@@ -127,7 +127,7 @@
                     var index = layer.load(1, {
                         shade: [0.1,'#fff'] //0.1透明度的白色背景
                     });
-                    parent.location.href = '/index';
+                     parent.location.href = ctx + "index";
                 } else {
                     layer.msg(r.msg);
                 }

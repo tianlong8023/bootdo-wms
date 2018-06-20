@@ -24,7 +24,7 @@ function getAllSelectNodes() {
 function getMenuTreeData() {
 	$.ajax({
 		type : "GET",
-		url : "/sys/menu/tree",
+        url: ctx + "sys/menu/tree",
 		success : function(menuTree) {
 			loadMenuTree(menuTree);
 		}
@@ -50,7 +50,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/sys/role/save",
+        url: ctx + "sys/role/save",
 		data : role, // 你的formid
 
 		async : false,

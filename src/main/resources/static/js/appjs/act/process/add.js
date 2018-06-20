@@ -12,7 +12,7 @@ function save() {
     var formData = new FormData($("#signupForm")[0]);
     $.ajax({
 		type : "POST",
-		url : "/activiti/process/save",
+        url: ctx + "activiti/process/save",
         data: formData,
         async: false,
         cache: false,

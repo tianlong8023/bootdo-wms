@@ -1,4 +1,4 @@
-var prefix = "/sys/role";
+var prefix = ctx + "sys/role";
 $(function() {
 	load();
 });

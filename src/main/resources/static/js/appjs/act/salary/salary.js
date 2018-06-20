@@ -1,5 +1,4 @@
-
-var prefix = "/activiti/salary"
+var prefix = ctx + "activiti/salary"
 $(function() {
 	load();
 });

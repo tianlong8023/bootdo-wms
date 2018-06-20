@@ -12,7 +12,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url :"/act/salary/start/"+procDefId,
+        url: ctx + "act/salary/start/" + procDefId,
 		data : $('#signupForm').serialize(),
 		async : false,
 		error : function(request) {

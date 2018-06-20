@@ -83,7 +83,8 @@
 								type="hidden">
 							<div class="text-right form-group">
 								<a class="btn btn-default waves-effect waves-light"
-									href="/admin/article">返回列表</a>
+                                   href="/admin/article"
+                                   th:href="@{/admin/article}">返回列表</a>
 								<button type="button"
 									class="btn btn-primary waves-effect waves-light"
 									onclick="save()">保存文章</button>
@@ -100,7 +101,8 @@
 
 	<div th:include="include::footer"></div>
 
-	<script type="text/javascript" src="/js/appjs/blog/bComments/add.js">
+    <script type="text/javascript" src="/js/appjs/blog/bComments/add.js"
+            th:src="@{/js/appjs/blog/bComments/add.js}">
 		
 	</script>
 </body>

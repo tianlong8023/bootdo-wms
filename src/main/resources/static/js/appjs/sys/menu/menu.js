@@ -1,4 +1,4 @@
-var prefix = "/sys/menu"
+var prefix = ctx + "sys/menu"
 $(document).ready(function () {
     load();
 });

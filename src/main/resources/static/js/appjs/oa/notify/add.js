@@ -12,7 +12,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/oa/notify/save",
+        url: ctx + "oa/notify/save",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -51,7 +51,7 @@ function validateRule() {
 function loadType(){
 	var html = "";
 	$.ajax({
-		url : '/common/dict/list/oa_notify_type',
+        url: ctx + 'common/dict/list/oa_notify_type',
 		success : function(data) {
 			//加载数据
 			for (var i = 0; i < data.length; i++) {

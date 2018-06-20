@@ -28,7 +28,7 @@ function save() {
     $.ajax({
         cache: true,
         type: "POST",
-        url: "/act/salary/save",
+        url: ctx + "act/salary/save",
         data: $('#signupForm').serialize(),// 你的formid
         async: false,
         error: function (request) {
