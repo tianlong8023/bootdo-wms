@@ -25,7 +25,7 @@
 		function getTreeData() {
 			$.ajax({
 				type : "GET",
-				url : "/sys/user/tree",
+				url : ctx+"sys/user/tree",
 				success : function(tree) {
 					loadTree(tree);
 				}
