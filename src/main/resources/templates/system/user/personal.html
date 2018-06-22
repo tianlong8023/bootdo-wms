@@ -125,7 +125,7 @@
                     <!--photo_info-->
                     <div class="ibox-content tab-pane fade gg" id="photo_info">
                         <div class="ggcontainer" id="crop-avatar">
-                            <form class="avatar-form" action="/sys/user/uploadImg" enctype="multipart/form-data" method="post">
+                            <form class="avatar-form" action="/sys/user/uploadImg" th:action="@{/sys/user/uploadImg}" enctype="multipart/form-data" method="post">
                                 <div class="avatar-body">
                                     <div class="avatar-upload">
                                         <input class="avatar-src" name="avatar_src" type="hidden">

@@ -111,7 +111,7 @@ public class FileController extends BaseController {
         if ("test".equals(getUsername())) {
             return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
         }
-		String fileName = bootdoConfig.getUploadPath() + sysFileService.get(id).getUrl().replace("/files/", "");
+		String fileName = bootdoConfig.getUploadPath() + sysFileService.get(id).getUrl();
 		if (sysFileService.remove(id) > 0) {
 			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
@@ -144,10 +144,11 @@ public class FileController extends BaseController {
             return Result.error(1, "演示系统不允许修改,完整体验请部署程序");
         }
 		String fileName = file.getOriginalFilename();
-		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		Date now = new Date();
+		String url = "/files/" + DateUtils.format(now) + "/" + FileUtil.renameToUUID(fileName);
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), url, now);
 		try {
-			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath() + url, fileName);
 		} catch (Exception e) {
             return Result.error();
         }
