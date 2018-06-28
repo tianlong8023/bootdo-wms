@@ -38,7 +38,7 @@ public class Swagger2Config {
                 //页面标题
                 .title("功能测试")
                 //创建人
-                .contact(new Contact("skyliu", "www.skyliu.club", "513662388@qq.com"))
+                .contact(new Contact("skyliu", "www.skyliu.top", "513662388@qq.com"))
                 //版本号
                 .version("1.0")
                 //描述
