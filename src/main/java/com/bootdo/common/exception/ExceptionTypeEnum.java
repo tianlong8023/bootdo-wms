@@ -13,7 +13,7 @@ package com.bootdo.common.exception;
  */
 public enum ExceptionTypeEnum {
 
-    BD("BDException");
+    BD("BDException"), APP("APPException");
 
     private String name;
 

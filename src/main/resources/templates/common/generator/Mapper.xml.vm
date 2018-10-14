@@ -11,7 +11,7 @@
 		select #foreach($column in $columns)`$column.columnName`#if($velocityCount != $columns.size()),#end#end from ${tableName}
         <where>  
 		  #foreach($column in $columns)
-		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
+		  <if test="$column.attrname != null"> and $column.columnName = #{$column.attrname} </if>
 		  #end
 		</where>
         <choose>
@@ -31,7 +31,7 @@
 		select count(*) from ${tableName}
 		 <where>  
 		  #foreach($column in $columns)
-		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
+		  <if test="$column.attrname != null"> and $column.columnName = #{$column.attrname} </if>
 		  #end
 		</where>
 	</select>

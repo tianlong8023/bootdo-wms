@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.miniApp.dao.AppUserDao">
+
+    <select id="get" resultType="com.bootdo.miniApp.domain.AppUserDO">
+		select `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`creator_id`,`gmt_create`,`modifier_id`,`gmt_modified` from mini_app_user where id = #{value}
+	</select>
+
+    <select id="getByBid" resultType="com.bootdo.miniApp.domain.AppUserDO">
+		select `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`creator_id`,`gmt_create`,`modifier_id`,`gmt_modified` from mini_app_user where user_bid = #{value}
+	</select>
+
+    <select id="list" resultType="com.bootdo.miniApp.domain.AppUserDO">
+        select
+        `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`creator_id`,`gmt_create`,`modifier_id`,`gmt_modified`
+        from mini_app_user
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="userBid != null">and user_bid = #{userBid}</if>
+            <if test="openid != null">and openid = #{openid}</if>
+            <if test="sessionKey != null">and session_key = #{sessionKey}</if>
+            <if test="unionid != null">and unionid = #{unionid}</if>
+            <if test="isDeleted != null">and is_deleted = #{isDeleted}</if>
+            <if test="creatorId != null">and creator_id = #{creatorId}</if>
+            <if test="gmtCreate != null">and gmt_create = #{gmtCreate}</if>
+            <if test="modifierId != null">and modifier_id = #{modifierId}</if>
+            <if test="gmtModified != null">and gmt_modified = #{gmtModified}</if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from mini_app_user
+        <where>
+            <if test="id != null">and id = #{id}</if>
+            <if test="userBid != null">and user_bid = #{userBid}</if>
+            <if test="openid != null">and openid = #{openid}</if>
+            <if test="sessionKey != null">and session_key = #{sessionKey}</if>
+            <if test="unionid != null">and unionid = #{unionid}</if>
+            <if test="isDeleted != null">and is_deleted = #{isDeleted}</if>
+            <if test="creatorId != null">and creator_id = #{creatorId}</if>
+            <if test="gmtCreate != null">and gmt_create = #{gmtCreate}</if>
+            <if test="modifierId != null">and modifier_id = #{modifierId}</if>
+            <if test="gmtModified != null">and gmt_modified = #{gmtModified}</if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.bootdo.miniApp.domain.AppUserDO" useGeneratedKeys="true" keyProperty="id">
+		insert into mini_app_user
+		(
+			`user_bid`, 
+			`openid`, 
+			`session_key`, 
+			`unionid`, 
+			`is_deleted`, 
+			`creator_id`, 
+			`gmt_create`, 
+			`modifier_id`, 
+			`gmt_modified`
+		)
+		values
+		(
+			#{userBid}, 
+			#{openid}, 
+			#{sessionKey}, 
+			#{unionid}, 
+			#{isDeleted}, 
+			#{creatorId}, 
+			#{gmtCreate}, 
+			#{modifierId}, 
+			#{gmtModified}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.bootdo.miniApp.domain.AppUserDO">
+        update mini_app_user
+        <set>
+            <if test="userBid != null">`user_bid` = #{userBid},</if>
+            <if test="openid != null">`openid` = #{openid},</if>
+            <if test="sessionKey != null">`session_key` = #{sessionKey},</if>
+            <if test="unionid != null">`unionid` = #{unionid},</if>
+            <if test="isDeleted != null">`is_deleted` = #{isDeleted},</if>
+            <if test="creatorId != null">`creator_id` = #{creatorId},</if>
+            <if test="gmtCreate != null">`gmt_create` = #{gmtCreate},</if>
+            <if test="modifierId != null">`modifier_id` = #{modifierId},</if>
+            <if test="gmtModified != null">`gmt_modified` = #{gmtModified}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from mini_app_user where id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from mini_app_user where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

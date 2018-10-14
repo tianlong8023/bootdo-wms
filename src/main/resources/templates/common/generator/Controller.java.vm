@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +18,7 @@ import ${package}.domain.${className}DO;
 import ${package}.service.${className}Service;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.Result;
 
 /**
  * ${comments}
@@ -73,11 +72,11 @@ public class ${className}Controller {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("${pathName}:${classname}:add")
-	public R save( ${className}DO ${classname}){
+	public Result save( ${className}DO ${classname}){
 		if(${classname}Service.save(${classname})>0){
-			return R.ok();
+			return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 	/**
 	 * 修改
@@ -85,9 +84,9 @@ public class ${className}Controller {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("${pathName}:${classname}:edit")
-	public R update( ${className}DO ${classname}){
+	public Result update( ${className}DO ${classname}){
 		${classname}Service.update(${classname});
-		return R.ok();
+		return Result.ok();
 	}
 	
 	/**
@@ -96,11 +95,11 @@ public class ${className}Controller {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:remove")
-	public R remove( ${pk.attrType} ${pk.attrname}){
+	public Result remove( ${pk.attrType} ${pk.attrname}){
 		if(${classname}Service.remove(${pk.attrname})>0){
-		return R.ok();
+		return Result.ok();
 		}
-		return R.error();
+		return Result.error();
 	}
 	
 	/**
@@ -109,9 +108,9 @@ public class ${className}Controller {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:batchRemove")
-	public R remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s){
+	public Result remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s){
 		${classname}Service.batchRemove(${pk.attrname}s);
-		return R.ok();
+		return Result.ok();
 	}
 	
 }
