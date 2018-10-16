@@ -4,16 +4,16 @@
 <mapper namespace="com.bootdo.miniApp.dao.AppUserDao">
 
     <select id="get" resultType="com.bootdo.miniApp.domain.AppUserDO">
-		select `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`creator_id`,`gmt_create`,`modifier_id`,`gmt_modified` from mini_app_user where id = #{value}
+		select `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`gmt_create`,`gmt_modified` from mini_app_user where id = #{value}
 	</select>
 
     <select id="getByBid" resultType="com.bootdo.miniApp.domain.AppUserDO">
-		select `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`creator_id`,`gmt_create`,`modifier_id`,`gmt_modified` from mini_app_user where user_bid = #{value}
+		select `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`gmt_create`,`gmt_modified` from mini_app_user where user_bid = #{value}
 	</select>
 
     <select id="list" resultType="com.bootdo.miniApp.domain.AppUserDO">
         select
-        `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`creator_id`,`gmt_create`,`modifier_id`,`gmt_modified`
+        `id`,`user_bid`,`openid`,`session_key`,`unionid`,`is_deleted`,`gmt_create`,`gmt_modified`
         from mini_app_user
         <where>
             <if test="id != null">and id = #{id}</if>
@@ -22,9 +22,7 @@
             <if test="sessionKey != null">and session_key = #{sessionKey}</if>
             <if test="unionid != null">and unionid = #{unionid}</if>
             <if test="isDeleted != null">and is_deleted = #{isDeleted}</if>
-            <if test="creatorId != null">and creator_id = #{creatorId}</if>
             <if test="gmtCreate != null">and gmt_create = #{gmtCreate}</if>
-            <if test="modifierId != null">and modifier_id = #{modifierId}</if>
             <if test="gmtModified != null">and gmt_modified = #{gmtModified}</if>
         </where>
         <choose>
@@ -49,9 +47,7 @@
             <if test="sessionKey != null">and session_key = #{sessionKey}</if>
             <if test="unionid != null">and unionid = #{unionid}</if>
             <if test="isDeleted != null">and is_deleted = #{isDeleted}</if>
-            <if test="creatorId != null">and creator_id = #{creatorId}</if>
             <if test="gmtCreate != null">and gmt_create = #{gmtCreate}</if>
-            <if test="modifierId != null">and modifier_id = #{modifierId}</if>
             <if test="gmtModified != null">and gmt_modified = #{gmtModified}</if>
         </where>
     </select>
@@ -64,9 +60,7 @@
 			`session_key`, 
 			`unionid`, 
 			`is_deleted`, 
-			`creator_id`, 
-			`gmt_create`, 
-			`modifier_id`, 
+			`gmt_create`,
 			`gmt_modified`
 		)
 		values
@@ -76,9 +70,7 @@
 			#{sessionKey}, 
 			#{unionid}, 
 			#{isDeleted}, 
-			#{creatorId}, 
-			#{gmtCreate}, 
-			#{modifierId}, 
+			#{gmtCreate},
 			#{gmtModified}
 		)
 	</insert>
@@ -91,9 +83,7 @@
             <if test="sessionKey != null">`session_key` = #{sessionKey},</if>
             <if test="unionid != null">`unionid` = #{unionid},</if>
             <if test="isDeleted != null">`is_deleted` = #{isDeleted},</if>
-            <if test="creatorId != null">`creator_id` = #{creatorId},</if>
             <if test="gmtCreate != null">`gmt_create` = #{gmtCreate},</if>
-            <if test="modifierId != null">`modifier_id` = #{modifierId},</if>
             <if test="gmtModified != null">`gmt_modified` = #{gmtModified}</if>
         </set>
         where id = #{id}

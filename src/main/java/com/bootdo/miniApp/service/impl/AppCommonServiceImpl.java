@@ -98,10 +98,14 @@ public class AppCommonServiceImpl implements AppCommonService {
             appUserDO = new AppUserDO(idWorkerService.nextStringId(), openid, session_key, unionid);
             appUserDO.setIsDeleted(DeleteStatusEnum.IsNotDeleted.getCode());
             appUserDO.setGmtCreate(nowTime);
-            appUserDO.setGmtModified(nowTime);
             appUserService.save(appUserDO);
+        } else {
+            appUserDO = appUserDOList.get(0);
+            appUserDO.setSessionKey(session_key);
+            appUserDO.setUnionid(unionid);
+            appUserDO.setGmtModified(nowTime);
+            appUserService.update(appUserDO);
         }
-        appUserDO = appUserDOList.get(0);
         //3、保存登錄日誌
         AppUserLoginLogDO loginLogDO = BeanUtils.copyProperties(AppUserLoginLogDO.class, appUserDO);
         loginLogDO.setId(null);

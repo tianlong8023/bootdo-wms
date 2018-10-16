@@ -3,7 +3,6 @@ package com.bootdo.miniApp.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
  * 小程序用户表
  *
@@ -26,12 +25,8 @@ public class AppUserDO implements Serializable {
     private String unionid;
     //是否删除：1-已删除，0-未删除
     private Integer isDeleted;
-    //创建人id
-    private Integer creatorId;
     //创建日期
     private Date gmtCreate;
-    //更新人id
-    private Integer modifierId;
     //更新日期
     private Date gmtModified;
 
@@ -130,20 +125,6 @@ public class AppUserDO implements Serializable {
     }
 
     /**
-     * 设置：创建人id
-     */
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    /**
-     * 获取：创建人id
-     */
-    public Integer getCreatorId() {
-        return creatorId;
-    }
-
-    /**
      * 设置：创建日期
      */
     public void setGmtCreate(Date gmtCreate) {
@@ -155,20 +136,6 @@ public class AppUserDO implements Serializable {
      */
     public Date getGmtCreate() {
         return gmtCreate;
-    }
-
-    /**
-     * 设置：更新人id
-     */
-    public void setModifierId(Integer modifierId) {
-        this.modifierId = modifierId;
-    }
-
-    /**
-     * 获取：更新人id
-     */
-    public Integer getModifierId() {
-        return modifierId;
     }
 
     /**
